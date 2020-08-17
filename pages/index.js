@@ -1,6 +1,18 @@
-import Head from 'next/head'
+import React, { Component } from 'react';
+import Head from 'next/head';
+import fetch from 'node-fetch';
 
-export default function Home() {
+export async function getStaticProps() {
+  const res = await fetch('https://naluri-space-backend.herokuapp.com/api/pi');
+  const data = await res.json();
+
+  return { props: data };
+}
+
+function Homepage({ pi }) {
+  const sunRadius = 695508; //in km
+  const sunCircumference = new Intl.NumberFormat().format(2*pi*sunRadius);
+
   return (
     <div className="container">
       <Head>
@@ -20,12 +32,12 @@ export default function Home() {
         <div className="grid">
           <div className="card">
             <h3>Latest Pi Iteration &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
+            <p>{pi}</p>
           </div>
 
           <div className="card">
             <h3>Circumference of the Sun &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
+            <p>{sunCircumference} km</p>
           </div>
         </div>
       </main>
@@ -171,3 +183,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Homepage
