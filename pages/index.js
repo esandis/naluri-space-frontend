@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Head from 'next/head';
 import fetch from 'node-fetch';
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch('https://naluri-space-backend.herokuapp.com/api/pi');
   const data = await res.json();
 
