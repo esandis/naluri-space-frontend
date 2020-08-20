@@ -9,9 +9,8 @@ export async function getServerSideProps() {
   return { props: data };
 }
 
-function Homepage({ pi }) {
-  const sunRadius = 695508; //in km
-  const sunCircumference = new Intl.NumberFormat().format(2*pi*sunRadius);
+function Homepage({ pi, sunCircumference }) {
+  sunCircumference = new Intl.NumberFormat().format(sunCircumference);
 
   return (
     <div className="container">
